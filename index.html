@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Library</title>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <img src="Assets/logo.png" alt="logo image" id="logoImg" />
+          <h1 id="brandName">MyLib</h1>
+        </div>
+        <div class="headerQuotes">
+          <div class="firstQuote">
+            <p id="bookQuote">
+              They say in every library there is a single book that can answer
+              the question that burns like a fire in the mind.
+            </p>
+            <p id="quoteAuthor">- LEMONY SNICKET</p>
+          </div>
+
+          <div class="mainQuote">Books are a uniquely portable magic</div>
+        </div>
+      </header>
+
+      <div class="libContainer">
+        <div class="bookCard">
+          <div class="bookCover">
+            <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
+          </div>
+
+          <div class="bookDetails">
+            <!--Ensure to do title capitilisation in JS code-->
+            <h2 class="bookTitle">Half of a Yellow Sun</h2>
+
+            <div class="author">
+              <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
+              <p class="authorName">Chimamanda Ngozi Adichie</p>
+            </div>
+
+            <div class="pages">
+              <img src="Assets/pages-icon.png" alt="Pages Icon" />
+              <p class="numPages">254 Pages</p>
+            </div>
+
+            <button id="readBtn">Read</button>
+          </div>
+        </div>
+
+        <div class="bookCard">
+          <div class="bookCover">
+            <img src="Assets/stay-with-me-72.jpg" alt="Book Cover" />
+          </div>
+
+          <div class="bookDetails">
+            <!--Ensure to do title capitilisation in JS code-->
+            <h2 class="bookTitle">Stay With Me</h2>
+
+            <div class="author">
+              <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
+              <p class="authorName">Ayobami Adebayo</p>
+            </div>
+
+            <div class="pages">
+              <img src="Assets/pages-icon.png" alt="Pages Icon" />
+              <p class="numPages">203 Pages</p>
+            </div>
+
+            <button id="notreadBtn">Not Read</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="addBook">
+        <img src="Assets/add-Icon.png" alt="Add Icon" id="add-Icon" />
+      </div>
+
+      <form class="modalContainer">
+        <h2 class="title">Add Book</h2>
+
+        <div class="details">
+          <div>
+            <label for="title">Book Title</label>
+            <input type="text" id="title" />
+          </div>
+
+          <div>
+            <label for="title">Book Title</label>
+            <input type="text" id="title" />
+          </div>
+
+          <div>
+            <label for="numOfPages">Number of Pages</label>
+            <input type="number" id="number" />
+          </div>
+
+          <input type="button" value="Submit" />
+          <input type="button" value="Cancel" />
+        </div>
+
+        <div class="upload">
+          <input
+            type="file"
+            name="bookCover"
+            id="book-Cover"
+            accept="image/png, image/jpeg"
+          />
+          <input type="button" value="Upload Cover" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
