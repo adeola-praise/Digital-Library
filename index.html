@@ -78,40 +78,57 @@
       <div class="addBook">
         <img src="Assets/add-Icon.png" alt="Add Icon" id="add-Icon" />
       </div>
+    </div>
 
-      <form class="modalContainer">
-        <h2 class="title">Add Book</h2>
+    <div class="modalContainer">
+      <div class="modalContent">
+        <h2 id="modalTitle">Add Book</h2>
+        <form class="bookForm">
+          <div class="details">
+            <div>
+              <label for="title">Book Title</label><br />
+              <input type="text" id="title" />
+            </div>
 
-        <div class="details">
-          <div>
-            <label for="title">Book Title</label>
-            <input type="text" id="title" />
+            <div>
+              <label for="author">Author's Name</label><br />
+              <input type="text" id="author" />
+            </div>
+
+            <div>
+              <label for="numOfPages">Number of Pages</label><br />
+              <input type="number" id="numOfPages" />
+            </div>
+
+            <div class="readStatus">
+              <input type="checkbox" name="readCheck" id="readCheck" />
+              <label for="readCheck"></label>
+              <span> Have you read this book?</span>
+            </div>
+
+            <input type="button" value="Submit" id="submitBtn" />
+            <input type="button" value="Cancel" id="cancelBtn" />
           </div>
 
-          <div>
-            <label for="title">Book Title</label>
-            <input type="text" id="title" />
+          <div class="upload">
+            <input
+              type="file"
+              name="bookCover"
+              id="book-Cover"
+              accept="image/png, image/jpeg"
+              hidden
+            />
+            <img
+              src="Assets/upload (1).png"
+              alt="Upload File Icon"
+              id="uploadIcon"
+            />
+            <h3>Choose a file</h3>
+            <p>Selected image must be in .png or .jpeg file format</p>
+            <!-- <input type="button" value="Upload Cover" /> -->
           </div>
-
-          <div>
-            <label for="numOfPages">Number of Pages</label>
-            <input type="number" id="number" />
-          </div>
-
-          <input type="button" value="Submit" />
-          <input type="button" value="Cancel" />
-        </div>
-
-        <div class="upload">
-          <input
-            type="file"
-            name="bookCover"
-            id="book-Cover"
-            accept="image/png, image/jpeg"
-          />
-          <input type="button" value="Upload Cover" />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </body>
 </html>
