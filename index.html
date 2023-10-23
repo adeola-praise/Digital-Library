@@ -27,50 +27,60 @@
         </div>
       </header>
 
-      <div class="libContainer">
-        <div class="bookCard">
-          <div class="bookCover">
-            <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
+      <div class="library">
+        <div class="libraryMsg">
+          <div class="msgContainer">
+            <img src="Assets/book.png" alt="Books Icon" id="bookIcon" />
           </div>
-
-          <div class="bookDetails">
-            <!--Ensure to do title capitilisation in JS code-->
-            <h2 class="bookTitle">Half of a Yellow Sun</h2>
-
-            <div class="author">
-              <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
-              <p class="authorName">Chimamanda Ngozi Adichie</p>
-            </div>
-
-            <div class="pages">
-              <img src="Assets/pages-icon.png" alt="Pages Icon" />
-              <p class="numPages">254 Pages</p>
-            </div>
-
-            <button id="readBtn">Read</button>
-          </div>
+          <h4 id="msgHeader">Your Library is Empty</h4>
+          <p id="msg">Click on the 'Add Button' to add books to your library</p>
         </div>
 
-        <div class="bookCard">
-          <div class="bookCover">
-            <img src="Assets/stay-with-me-72.jpg" alt="Book Cover" />
+        <div class="libContainer">
+          <div class="bookCard">
+            <div class="bookCover">
+              <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
+            </div>
+
+            <div class="bookDetails">
+              <!--Ensure to do title capitilisation in JS code-->
+              <h2 class="bookTitle">Half of a Yellow Sun</h2>
+
+              <div class="author">
+                <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
+                <p class="authorName">Chimamanda Ngozi Adichie</p>
+              </div>
+
+              <div class="pages">
+                <img src="Assets/pages-icon.png" alt="Pages Icon" />
+                <p class="numPages">254 Pages</p>
+              </div>
+
+              <button id="readBtn">Read</button>
+            </div>
           </div>
 
-          <div class="bookDetails">
-            <!--Ensure to do title capitilisation in JS code-->
-            <h2 class="bookTitle">Stay With Me</h2>
-
-            <div class="author">
-              <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
-              <p class="authorName">Ayobami Adebayo</p>
+          <div class="bookCard">
+            <div class="bookCover">
+              <img src="Assets/stay-with-me-72.jpg" alt="Book Cover" />
             </div>
 
-            <div class="pages">
-              <img src="Assets/pages-icon.png" alt="Pages Icon" />
-              <p class="numPages">203 Pages</p>
-            </div>
+            <div class="bookDetails">
+              <!--Ensure to do title capitilisation in JS code-->
+              <h2 class="bookTitle">Stay With Me</h2>
 
-            <button id="notreadBtn">Not Read</button>
+              <div class="author">
+                <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
+                <p class="authorName">Ayobami Adebayo</p>
+              </div>
+
+              <div class="pages">
+                <img src="Assets/pages-icon.png" alt="Pages Icon" />
+                <p class="numPages">203 Pages</p>
+              </div>
+
+              <button id="notreadBtn">Not Read</button>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +113,7 @@
             <div class="readStatus">
               <input type="checkbox" name="readCheck" id="readCheck" />
               <label for="readCheck"></label>
-              <span> Have you read this book?</span>
+              <span>Have you read this book?</span>
             </div>
 
             <input type="button" value="Submit" id="submitBtn" />
