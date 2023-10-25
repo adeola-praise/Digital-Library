@@ -37,28 +37,30 @@
         </div>
 
         <div class="libContainer">
-          <div class="bookCard">
-            <div class="bookCover">
-              <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
-            </div>
-
-            <div class="bookDetails">
-              <!--Ensure to do title capitilisation in JS code-->
-              <h2 class="bookTitle">Half of a Yellow Sun</h2>
-
-              <div class="author">
-                <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
-                <p class="authorName">Chimamanda Ngozi Adichie</p>
+          <template id="bookCardTemplate">
+            <div class="bookCard">
+              <div class="bookCover">
+                <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
               </div>
 
-              <div class="pages">
-                <img src="Assets/pages-icon.png" alt="Pages Icon" />
-                <p class="numPages">254 Pages</p>
-              </div>
+              <div class="bookDetails">
+                <!--Ensure to do title capitilisation in JS code-->
+                <h2 class="bookTitle">Half of a Yellow Sun</h2>
 
-              <button id="readBtn">Read</button>
+                <div class="author">
+                  <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
+                  <p class="authorName">Chimamanda Ngozi Adichie</p>
+                </div>
+
+                <div class="pages">
+                  <img src="Assets/pages-icon.png" alt="Pages Icon" />
+                  <p class="numPages">254 Pages</p>
+                </div>
+
+                <button id="readBtn">Read</button>
+              </div>
             </div>
-          </div>
+          </template>
 
           <div class="bookCard">
             <div class="bookCover">
@@ -140,5 +142,7 @@
         </form>
       </div>
     </div>
+
+    <script src="scripts.js"></script>
   </body>
 </html>
