@@ -288,28 +288,59 @@ header {
   margin-bottom: 5px;
 }
 
-#uploaded-icon {
+/* #uploaded-icon {
   width: 20px;
   height: auto;
   display: none;
-}
+} */
 
-#progress-container {
+#circular-progress {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: conic-gradient(#348482 3.6deg, #ededed 0deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
   display: none;
 }
 
-#progress-bar {
+#circular-progress::before {
+  content: " ";
   position: absolute;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
-  width: 0;
-  height: 0;
-  background-color: white;
-  border: 2px solid #348482;
+  background-color: #fff;
 }
 
+#progress-value {
+  position: absolute;
+  font-size: 8px;
+  font-weight: 800;
+  text-align: center;
+}
+
+#uploaded-checkmark {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  transform: rotate(15deg);
+  display: none;
+}
+
+#uploaded-checkmark img {
+  width: 30px;
+}
+
+#uploading-msg {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 3px;
+  display: none;
+}
 .readStatus {
   display: flex;
   cursor: pointer;

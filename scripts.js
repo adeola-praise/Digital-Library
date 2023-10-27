@@ -10,11 +10,15 @@ let addBookTitleInput = document.querySelector("#title");
 let addBookAuthorInput = document.querySelector("#author");
 let addNumOfPagesInput = document.querySelector("#numOfPages");
 let addReadCheckbox = document.querySelector("#readCheck");
+let chooseFile = document.getElementById("choose-file");
 
 // Variable for book cover image upload progress
 let uploadIcon = document.getElementById("upload-icon");
-let progressContainer = document.getElementById("progress-container");
-const progressBar = document.getElementById("progress-bar");
+let progressCircle = document.getElementById("circular-progress");
+let uploadingMsg = document.getElementById("uploading-msg");
+let uploadMsg = document.getElementById("upload-msg");
+let uploaded = document.getElementById("uploaded-checkmark");
+const progressValue = document.getElementById("progress-value");
 const uploadedIcon = document.getElementById("uploaded-icon");
 
 // Variable for uploaded book cover image
@@ -46,8 +50,6 @@ addBookCoverInput.addEventListener("change", function (e) {
   // Check if file is selected
   if (image_file) {
     const reader = new FileReader();
-    const delay = 100; // Delay in milliseconds (adjust as needed)
-    let loaded = 0; // Initialize loaded progress
 
     reader.addEventListener("load", () => {
       // Stores the result inside the uploaded_image variable
@@ -55,25 +57,7 @@ addBookCoverInput.addEventListener("change", function (e) {
     });
 
     // Display file upload progress
-    reader.onprogress = function (e) {
-      if (e.lengthComputable) {
-        const progress = (e.loaded / e.total) * 100;
-        // progressBar.style.width = `${progress}%`;
-
-        // Use setInterval to update the progress bar gradually
-        const interval = setInterval(function () {
-          if (loaded <= progress) {
-            progressContainer.style.display = "block";
-            uploadIcon.style.display = "none";
-            progressBar.style.width = `${loaded}%`;
-            progressBar.style.height = `${loaded}%`;
-            loaded++;
-          } else {
-            clearInterval(interval); // Stop the interval when progress is complete
-          }
-        }, delay);
-      }
-    };
+    reader.onprogress = showImgUploadProgress;
 
     reader.readAsDataURL(image_file);
   }
@@ -86,6 +70,39 @@ submitBookBtn.addEventListener("click", function (event) {
   addBookToLibrary();
   hideEmptyLibMsg();
 });
+
+// Show image file upload progress
+function showImgUploadProgress(e) {
+  const speed = 100;
+  let loaded = 0;
+  if (e.lengthComputable) {
+    const progress = (e.loaded / e.total) * 100;
+
+    // Use setInterval to update the progress bar gradually
+    const interval = setInterval(function () {
+      if (loaded <= progress) {
+        progressCircle.style.display = "flex";
+        uploadIcon.style.display = "none";
+
+        progressValue.textContent = `${loaded}%`;
+        uploadingMsg.style.display = "block";
+        chooseFile.style.display = "none";
+        uploadMsg.textContent = "Selected image file is being uploaded.";
+        progressCircle.style.background = `conic-gradient(#348482 ${
+          loaded * 3.6
+        }deg, #ededed 0deg)`;
+
+        loaded++;
+      } else {
+        progressValue.style.display = "none";
+        uploaded.style.display = "block";
+        uploadingMsg.textContent = "Upload Successful!";
+        uploadMsg.textContent = "Selected image file uploaded sucessfully.";
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+}
 
 // Constructor for library book template
 function Book(bookCover, author, numOfPages, title, read) {

@@ -115,16 +115,17 @@
               alt="Upload File Icon"
               id="upload-icon"
             />
-            <div id="progress-container">
-              <div id="progress-bar"></div>
+            <div id="circular-progress">
+              <span id="progress-value">20%</span>
+              <span id="uploaded-checkmark"
+                ><img src="Assets/checkmark-icon.png" alt="Checkmark Icon"
+              /></span>
             </div>
-            <img
-              id="uploaded-icon"
-              src="Assets/uploaded-icon.png"
-              alt="Uploaded Icon"
-            />
-            <label for="book-cover">Choose a file</label>
-            <p>Selected image must be in .png or .jpeg file format</p>
+            <label for="book-cover" id="choose-file">Choose a file</label>
+            <p id="uploading-msg">Uploading...</p>
+            <p id="upload-msg">
+              Selected image file should be in .png or .jpg format
+            </p>
             <!-- <input type="button" value="Upload Cover" /> -->
           </div>
         </form>
