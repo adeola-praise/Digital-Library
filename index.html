@@ -40,7 +40,11 @@
           <template id="bookCardTemplate">
             <div class="bookCard">
               <div class="bookCover">
-                <img src="Assets/HoaYS-Cover.jpg" alt="Book Cover" />
+                <img
+                  src="Assets/HoaYS-Cover.jpg"
+                  alt="Book Cover"
+                  id="uploaded-image"
+                />
               </div>
 
               <div class="bookDetails">
@@ -60,28 +64,6 @@
               </div>
             </div>
           </template>
-
-          <!-- <div class="bookCard">
-            <div class="bookCover">
-              <img src="Assets/stay-with-me-72.jpg" alt="Book Cover" />
-            </div>
-
-            <div class="bookDetails">
-              <h2 class="bookTitle">Stay With Me</h2>
-
-              <div class="author">
-                <img src="Assets/pen-icon.png" alt="Pen Icon" id="penIcon" />
-                <p class="authorName">Ayobami Adebayo</p>
-              </div>
-
-              <div class="pages">
-                <img src="Assets/pages-icon.png" alt="Pages Icon" />
-                <p class="numPages">203 Pages</p>
-              </div>
-
-              <button id="notreadBtn">Not Read</button>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -124,16 +106,24 @@
             <input
               type="file"
               name="bookCover"
-              id="book-Cover"
-              accept="image/png, image/jpeg"
+              id="book-cover"
+              accept="image/png, image/jpeg, image/jpg"
               hidden
             />
             <img
               src="Assets/upload (1).png"
               alt="Upload File Icon"
-              id="uploadIcon"
+              id="upload-icon"
             />
-            <h3>Choose a file</h3>
+            <div id="progress-container">
+              <div id="progress-bar"></div>
+            </div>
+            <img
+              id="uploaded-icon"
+              src="Assets/uploaded-icon.png"
+              alt="Uploaded Icon"
+            />
+            <label for="book-cover">Choose a file</label>
             <p>Selected image must be in .png or .jpeg file format</p>
             <!-- <input type="button" value="Upload Cover" /> -->
           </div>

@@ -3,12 +3,24 @@ let addBookBtn = document.querySelector(".addBook");
 let addBookModal = document.querySelector(".modalContainer");
 let cancelModalBtn = document.querySelector("#cancelBtn");
 let submitBookBtn = document.querySelector("#submitBtn");
+
+//Variables for user input
 let addBookCoverInput = document.querySelector("#book-cover");
 let addBookTitleInput = document.querySelector("#title");
 let addBookAuthorInput = document.querySelector("#author");
 let addNumOfPagesInput = document.querySelector("#numOfPages");
 let addReadCheckbox = document.querySelector("#readCheck");
 
+// Variable for book cover image upload progress
+let uploadIcon = document.getElementById("upload-icon");
+let progressContainer = document.getElementById("progress-container");
+const progressBar = document.getElementById("progress-bar");
+const uploadedIcon = document.getElementById("uploaded-icon");
+
+// Variable for uploaded book cover image
+let uploaded_image = "";
+
+// Variables for library
 let emptyLibMsg = document.querySelector(".libraryMsg");
 
 const libContainer = document.querySelector(".libContainer");
@@ -24,6 +36,47 @@ addBookBtn.addEventListener("click", function () {
 cancelModalBtn.addEventListener("click", function () {
   addBookModal.style.display = "none";
   hideEmptyLibMsg();
+});
+
+// Event listener for the input[type:file] for book cover image
+// Filereader is used to load files for user local device
+addBookCoverInput.addEventListener("change", function (e) {
+  const image_file = e.target.files[0];
+
+  // Check if file is selected
+  if (image_file) {
+    const reader = new FileReader();
+    const delay = 100; // Delay in milliseconds (adjust as needed)
+    let loaded = 0; // Initialize loaded progress
+
+    reader.addEventListener("load", () => {
+      // Stores the result inside the uploaded_image variable
+      uploaded_image = reader.result;
+    });
+
+    // Display file upload progress
+    reader.onprogress = function (e) {
+      if (e.lengthComputable) {
+        const progress = (e.loaded / e.total) * 100;
+        // progressBar.style.width = `${progress}%`;
+
+        // Use setInterval to update the progress bar gradually
+        const interval = setInterval(function () {
+          if (loaded <= progress) {
+            progressContainer.style.display = "block";
+            uploadIcon.style.display = "none";
+            progressBar.style.width = `${loaded}%`;
+            progressBar.style.height = `${loaded}%`;
+            loaded++;
+          } else {
+            clearInterval(interval); // Stop the interval when progress is complete
+          }
+        }, delay);
+      }
+    };
+
+    reader.readAsDataURL(image_file);
+  }
 });
 
 // Event listener for submitting add book modal
@@ -46,19 +99,19 @@ function Book(bookCover, author, numOfPages, title, read) {
 // Create a new book and adds it to the library array
 function addBookToLibrary() {
   let book = new Book(
-    addBookCoverInput,
+    uploaded_image,
     addBookAuthorInput.value,
     addNumOfPagesInput.value,
     addBookTitleInput.value,
     addReadCheckbox.value
   );
 
-  buildBookCard(book.author, book.title, book.numOfPages);
+  buildBookCard(uploaded_image, book.author, book.title, book.numOfPages);
   library.push(book);
 }
 
 // Create a book card for the new book
-function buildBookCard(author, title, numOfPages) {
+function buildBookCard(bookCover, author, title, numOfPages) {
   const template = document.getElementById("bookCardTemplate");
   const clone = document.importNode(template.content, true);
 
@@ -67,10 +120,12 @@ function buildBookCard(author, title, numOfPages) {
   const bookCardAuthorInput = clone.querySelector(".authorName");
   const bookCardTitleInput = clone.querySelector(".bookTitle");
   const bookCardPagesInput = clone.querySelector(".numPages");
+  const bookCoverInput = clone.querySelector("#uploaded-image");
 
+  bookCoverInput.src = bookCover;
   bookCardAuthorInput.textContent = author;
   bookCardTitleInput.textContent = title;
-  bookCardPagesInput.textContent = numOfPages;
+  bookCardPagesInput.textContent = numOfPages + " pages";
 
   libContainer.appendChild(bookCard);
 }
