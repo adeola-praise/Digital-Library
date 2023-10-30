@@ -421,3 +421,150 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* TABLET - 768px */
+
+/* DESKTOP - 1020px */
+@media (min-width: 1024px) {
+  .container {
+    background-color: #bfebeb;
+    min-height: 100vh;
+  }
+
+  .library {
+    border-radius: 20px 20px 0px 0px;
+    margin-top: -10px;
+    min-height: 100vh;
+  }
+
+  header {
+    background-color: #bfebeb;
+    height: 300px;
+  }
+
+  .headerQuotes {
+    flex-direction: row;
+    text-align: unset;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 10px 50px;
+    margin: 0px 0px 0px 0px;
+  }
+
+  .mainQuote {
+    font-weight: 700;
+    font-size: 36px;
+    width: 50%;
+    padding-left: 30px;
+  }
+
+  .firstQuote {
+    padding: 20px 20px 0px 50px;
+    width: 40%;
+    text-align: right;
+    padding-left: 30px;
+    margin-right: -10px;
+  }
+
+  #bookQuote {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  #quoteAuthor {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .libraryMsg {
+    top: 10%;
+    left: 45%;
+  }
+}
+
+/* DESKTOP - 1440px */
+@media (min-width: 1440px) {
+  .library {
+    border-radius: 20px 20px 0px 0px;
+    margin-top: -20px;
+  }
+
+  .libContainer {
+    padding: 30px 20px;
+  }
+
+  .headerQuotes {
+    padding: 0px 0px 10px 100px;
+    margin: 10px 30px 0px 30px;
+  }
+
+  .mainQuote {
+    font-size: 48px;
+  }
+
+  #bookQuote {
+    font-size: 16px;
+    line-height: 2;
+  }
+
+  #quoteAuthor {
+    margin-top: 30px;
+    font-size: 18px;
+    margin-bottom: 0px;
+    font-weight: 500;
+  }
+
+  .libraryMsg {
+    top: 10%;
+    left: 45%;
+  }
+
+  .libContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 60px 50px;
+    gap: 30px;
+    justify-content: flex-start;
+  }
+
+  .bookCard {
+    flex-direction: column;
+    padding: 5px;
+    border: none;
+  }
+
+  .bookCover {
+    width: 100%;
+    height: 300px;
+  }
+
+  .bookCover img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bookDetails {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .modalContainer {
+    width: 700px;
+    top: 20%;
+    left: 25%;
+  }
+
+  #modalTitle {
+    margin-bottom: 0px;
+  }
+
+  .bookForm {
+    height: 400px;
+  }
+
+  .details div {
+    margin-bottom: 10px;
+  }
+}
