@@ -60,7 +60,7 @@
                   <p class="numPages">254 Pages</p>
                 </div>
 
-                <button id="readBtn">Read</button>
+                <button id="readBtn" value="Read">Read</button>
               </div>
             </div>
           </template>
@@ -98,8 +98,11 @@
               <span>Have you read this book?</span>
             </div>
 
-            <input type="button" value="Submit" id="submitBtn" />
-            <input type="button" value="Cancel" id="cancelBtn" />
+            <button id="submitBtn">Submit</button>
+            <button id="cancelBtn">Cancel</button>
+
+            <!-- <input type="button" value="Submit" id="submitBtn" />
+            <input type="button" value="Cancel" id="cancelBtn" /> -->
           </div>
 
           <div class="upload">
@@ -107,6 +110,7 @@
               type="file"
               name="bookCover"
               id="book-cover"
+              class="userInput"
               accept="image/png, image/jpeg, image/jpg"
               hidden
             />
@@ -122,8 +126,8 @@
               /></span>
             </div>
             <label for="book-cover" id="choose-file">Choose a file</label>
-            <p id="uploading-msg">Uploading...</p>
-            <p id="upload-msg">
+            <p id="uploading-msg" class="msg">Uploading...</p>
+            <p id="upload-msg" class="msg">
               Selected image file should be in .png or .jpg format
             </p>
             <!-- <input type="button" value="Upload Cover" /> -->

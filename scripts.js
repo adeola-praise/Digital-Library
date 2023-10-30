@@ -34,10 +34,12 @@ const library = [];
 addBookBtn.addEventListener("click", function () {
   addBookModal.style.display = "block";
   hideEmptyLibMsg();
+  clearAllInputs();
 });
 
 // Event listener for cancelling the add book modal
-cancelModalBtn.addEventListener("click", function () {
+cancelModalBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   addBookModal.style.display = "none";
   hideEmptyLibMsg();
 });
@@ -73,7 +75,7 @@ submitBookBtn.addEventListener("click", function (event) {
 
 // Show image file upload progress
 function showImgUploadProgress(e) {
-  const speed = 100;
+  const speed = 30;
   let loaded = 0;
   if (e.lengthComputable) {
     const progress = (e.loaded / e.total) * 100;
@@ -82,6 +84,7 @@ function showImgUploadProgress(e) {
     const interval = setInterval(function () {
       if (loaded <= progress) {
         progressCircle.style.display = "flex";
+        progressValue.style.display = "block";
         uploadIcon.style.display = "none";
 
         progressValue.textContent = `${loaded}%`;
@@ -120,15 +123,21 @@ function addBookToLibrary() {
     addBookAuthorInput.value,
     addNumOfPagesInput.value,
     addBookTitleInput.value,
-    addReadCheckbox.value
+    addReadCheckbox.checked
   );
 
-  buildBookCard(uploaded_image, book.author, book.title, book.numOfPages);
+  buildBookCard(
+    uploaded_image,
+    book.author,
+    book.title,
+    book.numOfPages,
+    book.read
+  );
   library.push(book);
 }
 
 // Create a book card for the new book
-function buildBookCard(bookCover, author, title, numOfPages) {
+function buildBookCard(bookCover, author, title, numOfPages, isRead) {
   const template = document.getElementById("bookCardTemplate");
   const clone = document.importNode(template.content, true);
 
@@ -138,13 +147,37 @@ function buildBookCard(bookCover, author, title, numOfPages) {
   const bookCardTitleInput = clone.querySelector(".bookTitle");
   const bookCardPagesInput = clone.querySelector(".numPages");
   const bookCoverInput = clone.querySelector("#uploaded-image");
+  const bookReadInput = clone.querySelector("#readBtn");
 
   bookCoverInput.src = bookCover;
   bookCardAuthorInput.textContent = author;
   bookCardTitleInput.textContent = title;
   bookCardPagesInput.textContent = numOfPages + " pages";
+  if (isRead == false) {
+    bookReadInput.style.backgroundColor = "#e97777";
+    bookReadInput.textContent = "Not Read";
+    bookReadInput.value = "NotRead";
+  }
+
+  // Event listener for toggling read button
+  bookReadInput.addEventListener("click", function () {
+    toggleReadBtn(bookReadInput);
+  });
 
   libContainer.appendChild(bookCard);
+}
+
+// Allow user to toggle the read button so as to read and unread a book
+function toggleReadBtn(button) {
+  if (button.value === "Read") {
+    button.value = "NotRead";
+    button.style.backgroundColor = "#e97777";
+    button.textContent = "Not Read";
+  } else if (button.value === "NotRead") {
+    button.value = "Read";
+    button.style.backgroundColor = "#81bab9";
+    button.textContent = "Read";
+  }
 }
 
 // Loop through the library array to display books
@@ -152,4 +185,21 @@ function hideEmptyLibMsg() {
   if (library.length > 0) {
     emptyLibMsg.style.display = "none";
   }
+}
+
+// Clear all user inputs on submit or cancel add book modal
+function clearAllInputs() {
+  var allInputs = document.querySelectorAll("input");
+  allInputs.forEach((singleInput) => (singleInput.value = ""));
+  addReadCheckbox.checked = false;
+
+  // Restore image upload div to default
+  chooseFile.style.display = "block";
+  uploadIcon.style.display = "block";
+  progressCircle.style.display = "none";
+  uploadingMsg.style.display = "none";
+  uploaded.style.display = "none";
+  uploadMsg.textContent =
+    "Selected image file should be in .png or .jpg format";
+  uploaded_image = "";
 }
