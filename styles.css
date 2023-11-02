@@ -78,7 +78,33 @@ header {
   /* display: none; */
 }
 
+.edit {
+  display: flex;
+  justify-content: flex-end;
+  width: 150px;
+  height: 157px;
+  margin-bottom: 50px;
+}
+
+.deleteCard,
+.editCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteCard {
+  width: 50%;
+  background-color: #f8b3b3;
+}
+
+.editCard {
+  width: 50%;
+  background-color: #bfebeb;
+}
+
 .bookCard {
+  /* display: none; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -423,6 +449,8 @@ input[type="number"] {
 }
 
 /* TABLET - 768px */
+@media (min-width: 1024px) {
+}
 
 /* DESKTOP - 1020px */
 @media (min-width: 1024px) {
@@ -492,6 +520,11 @@ input[type="number"] {
 
   .libContainer {
     padding: 30px 20px;
+  }
+
+  header {
+    background-color: #bfebeb;
+    height: 400px;
   }
 
   .headerQuotes {

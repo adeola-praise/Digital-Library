@@ -27,6 +27,10 @@ let uploaded_image = "";
 // Variables for library
 let emptyLibMsg = document.querySelector(".libraryMsg");
 
+// Variables for swipe to delete action
+let startingX, movingX, bookCard, deleteButton, editButton;
+let bookCards = document.querySelectorAll(".bookCard");
+
 const libContainer = document.querySelector(".libContainer");
 const library = [];
 
@@ -202,4 +206,37 @@ function clearAllInputs() {
   uploadMsg.textContent =
     "Selected image file should be in .png or .jpg format";
   uploaded_image = "";
+}
+
+// Loop through the entire books in the library and add touch events for swipe action
+bookCards.forEach(function (card) {
+  card.addEventListener("touchstart", touchStart);
+  card.addEventListener("touchmove", touchMove);
+  card.addEventListener("touchend", touchEnd);
+  // card.querySelector(".delete-button").addEventListener("click", deleteBook);
+  // card.querySelector(".edit-button").addEventListener("click", editBook);
+});
+
+function touchStart(evt) {
+  startingX = evt.touches[0].clientX;
+  bookCard = evt.currentTarget;
+  deleteButton = bookCard.querySelector(".deleteCard");
+  editButton = bookCard.querySelector(".editCard");
+}
+
+function touchMove(evt) {
+  movingX = evt.touches[0].clientX;
+  var swipeDistance = startingX - movingX;
+
+  if (swipeDistance > 50) {
+    // Reveal the delete and edit buttons
+    deleteButton.style.transform = "translateX(-50px)";
+    editButton.style.transform = "translateX(-50px)";
+  }
+}
+
+function touchEnd() {
+  // Hide the delete and edit buttons
+  deleteButton.style.transform = "translateX(0)";
+  editButton.style.transform = "translateX(0)";
 }
