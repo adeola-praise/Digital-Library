@@ -27,10 +27,6 @@ let uploaded_image = "";
 // Variables for library
 let emptyLibMsg = document.querySelector(".libraryMsg");
 
-// Variables for swipe to delete action
-let startingX, movingX, bookCard, deleteButton, editButton;
-let bookCards = document.querySelectorAll(".bookCard");
-
 const libContainer = document.querySelector(".libContainer");
 const library = [];
 
@@ -152,6 +148,7 @@ function buildBookCard(bookCover, author, title, numOfPages, isRead) {
   const bookCardPagesInput = clone.querySelector(".numPages");
   const bookCoverInput = clone.querySelector("#uploaded-image");
   const bookReadInput = clone.querySelector("#readBtn");
+  const delBookCard = clone.querySelector(".deleteBtn");
 
   bookCoverInput.src = bookCover;
   bookCardAuthorInput.textContent = author;
@@ -168,7 +165,38 @@ function buildBookCard(bookCover, author, title, numOfPages, isRead) {
     toggleReadBtn(bookReadInput);
   });
 
+  // // Event listener for edit menu
+  delBookCard.addEventListener("click", function () {
+    deleteBookCard(delBookCard, bookCard);
+  });
+
   libContainer.appendChild(bookCard);
+}
+
+// Delete Book Card Function
+function deleteBookCard(delBtn, bookCard) {
+  const delConfirm = document.querySelector(".deleteBtn-Content");
+  // Delete card confirmation
+
+  if (delBtn.classList.contains("clicked")) {
+    libContainer.removeChild(bookCard);
+  } else {
+    delConfirm.style.display = "block";
+    delBtn.classList.add("clicked");
+  }
+
+  // Handles the case in which the user decides not to proceed with deletion
+  // Adding an event listener to handle clicks outside the delete button
+  function handleClickOutside(e) {
+    if (!delBtn.contains(e.target)) {
+      // If clicked outside delete button, execute the callback
+      delConfirm.style.display = "none";
+      delBtn.classList.remove("clicked");
+      document.removeEventListener("click", handleClickOutside); // Remove the event listener after execution
+    }
+  }
+
+  document.addEventListener("click", handleClickOutside);
 }
 
 // Allow user to toggle the read button so as to read and unread a book
@@ -206,37 +234,4 @@ function clearAllInputs() {
   uploadMsg.textContent =
     "Selected image file should be in .png or .jpg format";
   uploaded_image = "";
-}
-
-// Loop through the entire books in the library and add touch events for swipe action
-bookCards.forEach(function (card) {
-  card.addEventListener("touchstart", touchStart);
-  card.addEventListener("touchmove", touchMove);
-  card.addEventListener("touchend", touchEnd);
-  // card.querySelector(".delete-button").addEventListener("click", deleteBook);
-  // card.querySelector(".edit-button").addEventListener("click", editBook);
-});
-
-function touchStart(evt) {
-  startingX = evt.touches[0].clientX;
-  bookCard = evt.currentTarget;
-  deleteButton = bookCard.querySelector(".deleteCard");
-  editButton = bookCard.querySelector(".editCard");
-}
-
-function touchMove(evt) {
-  movingX = evt.touches[0].clientX;
-  var swipeDistance = startingX - movingX;
-
-  if (swipeDistance > 50) {
-    // Reveal the delete and edit buttons
-    deleteButton.style.transform = "translateX(-50px)";
-    editButton.style.transform = "translateX(-50px)";
-  }
-}
-
-function touchEnd() {
-  // Hide the delete and edit buttons
-  deleteButton.style.transform = "translateX(0)";
-  editButton.style.transform = "translateX(0)";
 }

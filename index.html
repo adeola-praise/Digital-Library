@@ -38,17 +38,6 @@
 
         <div class="libContainer">
           <template id="bookCardTemplate">
-            <!--Edit card details or delete card-->
-            <div class="edit">
-              <div class="deleteCard">
-                <img src="Assets/delete-icon.png" alt="Delete Icon" />
-              </div>
-
-              <div class="editCard">
-                <img src="Assets/edit-icon.png" alt="Edit Icon" />
-              </div>
-            </div>
-
             <div class="bookCard">
               <div class="bookCover">
                 <img
@@ -72,6 +61,21 @@
                 </div>
 
                 <button id="readBtn" value="Read">Read</button>
+              </div>
+
+              <div class="deleteBtn">
+                <img src="Assets/trash-icon.png" alt="" />
+                <span class="deleteBtn-Content">Delete</span>
+              </div>
+
+              <div class="editBook">
+                <!-- <div class="cancelEdit">
+                  <img src="Assets/cancel-icon.png" alt="Cancel Icon" />
+                </div>
+                <div class="editOptions">
+                  <div class="editDetails">Edit</div> -->
+                <!-- <div class="delete">Remove</div>
+                </div> -->
               </div>
             </div>
           </template>

@@ -78,31 +78,6 @@ header {
   /* display: none; */
 }
 
-.edit {
-  display: flex;
-  justify-content: flex-end;
-  width: 150px;
-  height: 157px;
-  margin-bottom: 50px;
-}
-
-.deleteCard,
-.editCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.deleteCard {
-  width: 50%;
-  background-color: #f8b3b3;
-}
-
-.editCard {
-  width: 50%;
-  background-color: #bfebeb;
-}
-
 .bookCard {
   /* display: none; */
   display: flex;
@@ -113,6 +88,9 @@ header {
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 .bookCover {
@@ -191,12 +169,77 @@ header {
   padding: 12px 0px;
 }
 
+/* Edit Book Design */
+.deleteBtn {
+  position: absolute;
+  cursor: pointer;
+  bottom: 10px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(37, 36, 36);
+  color: white;
+}
+
+.active,
+.deleteBtn:hover {
+  background-color: #f35d5d;
+  width: 80px;
+  font-size: 14px;
+  justify-content: space-evenly;
+}
+
+.deleteBtn-Content {
+  display: none;
+}
+
+.deleteBtn img {
+  width: 20px;
+  height: 20px;
+}
+
+.editBook {
+  display: none;
+  background-color: #e8e8e8;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.editOptions {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.cancelEdit {
+  background-color: #e97777;
+  margin-left: 60px;
+  margin-top: 5px;
+  margin-right: 5px;
+  height: 20px;
+}
+
+.cancelEdit img {
+  width: 20px;
+  height: 20px;
+}
+
 /* EMPTY LIBRARY MESSAGE */
 .libraryMsg {
   position: absolute;
   top: 20px;
   left: 85px;
-  display: flex;
+  /* display: flex; */
+  display: none;
   flex-direction: column;
   align-items: center;
   width: 200px;
