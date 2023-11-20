@@ -149,6 +149,7 @@ function buildBookCard(bookCover, author, title, numOfPages, isRead) {
   const bookCoverInput = clone.querySelector("#uploaded-image");
   const bookReadInput = clone.querySelector("#readBtn");
   const delBookCard = clone.querySelector(".deleteBtn");
+  const delConfirm = clone.querySelector(".deleteBtn-Content");
 
   bookCoverInput.src = bookCover;
   bookCardAuthorInput.textContent = author;
@@ -167,15 +168,14 @@ function buildBookCard(bookCover, author, title, numOfPages, isRead) {
 
   // // Event listener for edit menu
   delBookCard.addEventListener("click", function () {
-    deleteBookCard(delBookCard, bookCard);
+    deleteBookCard(delBookCard, bookCard, delConfirm);
   });
 
   libContainer.appendChild(bookCard);
 }
 
 // Delete Book Card Function
-function deleteBookCard(delBtn, bookCard) {
-  const delConfirm = document.querySelector(".deleteBtn-Content");
+function deleteBookCard(delBtn, bookCard, delConfirm) {
   // Delete card confirmation
 
   if (delBtn.classList.contains("clicked")) {
