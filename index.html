@@ -83,19 +83,28 @@
         <h2 id="modalTitle">Add Book</h2>
         <form class="bookForm">
           <div class="details">
-            <div>
+            <div class="formGroup">
               <label for="title">Book Title</label><br />
-              <input type="text" id="title" />
+              <input type="text" id="title" required placeholder="" />
+              <span class="errorMsg"></span>
             </div>
 
-            <div>
+            <div class="formGroup">
               <label for="author">Author's Name</label><br />
-              <input type="text" id="author" />
+              <input type="text" id="author" required placeholder="" textOnly />
+              <span class="errorMsg"></span>
             </div>
 
-            <div>
+            <div class="formGroup">
               <label for="numOfPages">Number of Pages</label><br />
-              <input type="number" id="numOfPages" />
+              <input
+                type="number"
+                id="numOfPages"
+                required
+                min="1"
+                placeholder=""
+              />
+              <span class="errorMsg"></span>
             </div>
 
             <div class="readStatus">
@@ -105,8 +114,8 @@
             </div>
 
             <div>
-              <button id="submitBtn">Submit</button>
-              <button id="cancelBtn">Cancel</button>
+              <button type="submit" id="submitBtn">Submit</button>
+              <button type="reset" id="cancelBtn">Cancel</button>
             </div>
           </div>
 
@@ -141,5 +150,6 @@
     </div>
 
     <script src="scripts.js"></script>
+    <!-- <script src="validate.js"></script> -->
   </body>
 </html>

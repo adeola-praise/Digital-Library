@@ -134,6 +134,12 @@ header {
   margin-right: 5px;
 }
 
+.formGroup input::placeholder {
+  color: #fb4b4b;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
 #readBtn {
   /* margin-top: 20px; */
   width: 80px;
@@ -282,7 +288,7 @@ header {
   border: 1px solid #348482;
   border-radius: 5px;
   width: 90%;
-  height: 450px;
+  /* height: 450px; */
   position: fixed;
   top: 85px;
   left: 20px;
@@ -329,6 +335,11 @@ header {
 #author:focus,
 #numOfPages:focus {
   outline-color: #348482;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 12px;
 }
 
 .upload {
