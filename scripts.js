@@ -28,7 +28,6 @@ let uploaded_image = "";
 let emptyLibMsg = document.querySelector(".libraryMsg");
 
 const libContainer = document.querySelector(".libContainer");
-// const library = [];
 
 let libStorage = JSON.parse(localStorage.getItem("libStorage"));
 
@@ -102,41 +101,6 @@ function showImgUploadProgress(e) {
   }
 }
 
-// Constructor for library book template
-function Book(bookCover, author, numOfPages, title, read) {
-  this.bookCover = bookCover;
-  this.author = author;
-  this.numOfPages = numOfPages;
-  this.title = title;
-  this.read = read;
-}
-
-// Create a new book and adds it to the library array
-function addBookToLibrary() {
-  let book = new Book(
-    uploaded_image,
-    addBookAuthorInput.value,
-    addNumOfPagesInput.value,
-    addBookTitleInput.value,
-    addReadCheckbox.checked
-  );
-
-  buildBookCard(
-    uploaded_image,
-    book.author,
-    book.title,
-    book.numOfPages,
-    book.read
-  );
-  // library.push(book);
-
-  //Add new book data to the library
-  library.setLibraryData(book);
-
-  // Update the library local storage
-  updateLibraryStorage(library.getLibraryData());
-}
-
 // Module pattern for library
 const library = (function () {
   let _libraryData;
@@ -158,12 +122,55 @@ const library = (function () {
     _libraryData.push(book);
   };
 
-  return { getLibraryData, setLibraryData };
+  const deletSingleData = (book) => {
+    _libraryData.splice(_libraryData.indexOf(book), 1);
+  };
+
+  return { getLibraryData, setLibraryData, deletSingleData };
 })();
 
+// Constructor for library book template
+function Book(bookCover, author, numOfPages, title, read) {
+  this.bookCover = bookCover;
+  this.author = author;
+  this.numOfPages = numOfPages;
+  this.title = title;
+  this.read = read;
+}
+
+// Create a new book and adds it to the library array
+function addBookToLibrary() {
+  let book = new Book(
+    uploaded_image,
+    addBookAuthorInput.value,
+    addNumOfPagesInput.value,
+    addBookTitleInput.value,
+    addReadCheckbox.checked
+  );
+
+  let bookData = book;
+
+  buildBookCard(
+    uploaded_image,
+    book.author,
+    book.title,
+    book.numOfPages,
+    book.read,
+    bookData
+  );
+
+  // library.push(book);
+
+  //Add new book data to the library
+  library.setLibraryData(book);
+
+  // Update the library local storage
+  updateLibraryStorage();
+}
+
 // Get the updated library data and overide the previous one stored
-function updateLibraryStorage(libraryData) {
-  const updatedLibrary = JSON.stringify(libraryData);
+function updateLibraryStorage() {
+  const updatedLibrary = JSON.stringify(library.getLibraryData());
   localStorage.setItem("libStorage", updatedLibrary);
 }
 
@@ -189,7 +196,7 @@ window.onload = (event) => {
 };
 
 // Create and display a book card for the new book
-function buildBookCard(bookCover, author, title, numOfPages, isRead) {
+function buildBookCard(bookCover, author, title, numOfPages, isRead, bookData) {
   const template = document.getElementById("bookCardTemplate");
   const clone = document.importNode(template.content, true);
 
@@ -220,18 +227,20 @@ function buildBookCard(bookCover, author, title, numOfPages, isRead) {
 
   // // Event listener for edit menu
   delBookCard.addEventListener("click", function () {
-    deleteBookCard(delBookCard, bookCard, delConfirm);
+    deleteBookCard(delBookCard, bookCard, delConfirm, bookData);
   });
 
   libContainer.appendChild(bookCard);
 }
 
 // Delete Book Card Function
-function deleteBookCard(delBtn, bookCard, delConfirm) {
+function deleteBookCard(delBtn, bookCard, delConfirm, bookData) {
   // Delete card confirmation
 
   if (delBtn.classList.contains("clicked")) {
     libContainer.removeChild(bookCard);
+    library.deletSingleData(bookData);
+    updateLibraryStorage();
   } else {
     delConfirm.style.display = "block";
     delBtn.classList.add("clicked");
