@@ -1,47 +1,34 @@
-// Loop through the entire books in the library and add touch events for swipe action
+// Create a module pattern for the library
+// This is a library
+const library = [
+  {
+    title: "My Life",
+    author: "Adeola",
+  },
 
-bookCards.forEach(function (card) {
-  card.addEventListener("touchstart", touchStart);
-  card.addEventListener("touchmove", touchMove);
-  card.addEventListener("touchend", touchEnd);
-  // card.querySelector(".delete-button").addEventListener("click", deleteBook);
-  // card.querySelector(".edit-button").addEventListener("click", editBook);
-});
+  {
+    title: "Your Life",
+    author: "Sunday",
+  },
+];
 
-function touchStart(evt) {
-  console.log("Touch start");
-  startingX = evt.touches[0].clientX;
-  bookCard = evt.currentTarget;
-  console.log(bookCard);
-  deleteButton = bookCard.querySelector(".deleteCard");
-  editButton = bookCard.querySelector(".editCard");
-}
+let newBook = {
+  title: "Their Life",
+  author: "Pelumi",
+};
 
-function touchMove(evt) {
-  console.log("Touch move");
-  movingX = evt.touches[0].clientX;
-  var swipeDistance = startingX - movingX;
+// Store the library data in local storage
+const libaryData = JSON.stringify(library); // Makes the data array a string so it can be stored in the localstorage
+localStorage.setItem("libStorage", libaryData);
 
-  if (swipeDistance > 50) {
-    // Reveal the delete and edit buttons
-    deleteButton.style.transform = "translateX(-50px)";
-    editButton.style.transform = "translateX(-50px)";
-  }
-}
+// Get the library data that you stored and add a new book' data to it
+const libraryStorage = JSON.parse(localStorage.getItem("libStorage")); // Convert the stored key from string back to array
 
-function touchEnd() {
-  console.log("Touch end");
-  // Hide the delete and edit buttons
-  deleteButton.style.transform = "translateX(0)";
-  editButton.style.transform = "translateX(0)";
-}
+libstorage.push(newBook);
 
+// On load, library is equal to the localstorage
+// Case 1
+// There are already stored books in the library, the user just wants to add more books
 
-{/* <div class="edit">
-                <div class="deleteCard">
-                  <img src="Assets/delete-icon.png" alt="Delete Icon" />
-                </div>
-
-                <div class="editCard">
-                  <img src="Assets/edit-icon.png" alt="Edit Icon" />
-                </div> */}
+// Case 2
+// There are no books at all and the libary is new and fresh

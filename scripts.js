@@ -28,7 +28,9 @@ let uploaded_image = "";
 let emptyLibMsg = document.querySelector(".libraryMsg");
 
 const libContainer = document.querySelector(".libContainer");
-const library = [];
+// const library = [];
+
+let libStorage = JSON.parse(localStorage.getItem("libStorage"));
 
 // Event listener for displaying add book modal
 addBookBtn.addEventListener("click", function () {
@@ -126,10 +128,67 @@ function addBookToLibrary() {
     book.numOfPages,
     book.read
   );
-  library.push(book);
+  // library.push(book);
+
+  //Add new book data to the library
+  library.setLibraryData(book);
+
+  // Update the library local storage
+  updateLibraryStorage(library.getLibraryData());
 }
 
-// Create a book card for the new book
+// Module pattern for library
+const library = (function () {
+  let _libraryData;
+
+  // The library data is a key in the local storage so to get it or add to it, you have to access it as a key
+
+  // Case 1: Library storage is empty
+  if (libStorage == null) {
+    _libraryData = [];
+  } else {
+    _libraryData = libStorage;
+  }
+
+  const getLibraryData = () => {
+    return _libraryData;
+  };
+
+  const setLibraryData = (book) => {
+    _libraryData.push(book);
+  };
+
+  return { getLibraryData, setLibraryData };
+})();
+
+// Get the updated library data and overide the previous one stored
+function updateLibraryStorage(libraryData) {
+  const updatedLibrary = JSON.stringify(libraryData);
+  localStorage.setItem("libStorage", updatedLibrary);
+}
+
+// Display all books stored locally in the library
+function loadLibraryStorage() {
+  if (libStorage !== null) {
+    libStorage.forEach((book) => {
+      buildBookCard(
+        book.bookCover,
+        book.author,
+        book.title,
+        book.numOfPages,
+        book.read
+      );
+    });
+  } else {
+    console.log("You have no stored books!.");
+  }
+}
+
+window.onload = (event) => {
+  loadLibraryStorage();
+};
+
+// Create and display a book card for the new book
 function buildBookCard(bookCover, author, title, numOfPages, isRead) {
   const template = document.getElementById("bookCardTemplate");
   const clone = document.importNode(template.content, true);
